@@ -1,8 +1,8 @@
-import 'dart:developer' show log;
-
+import 'package:family_meeting/pages/home_page.dart';
 import 'package:family_meeting/services/stream_video_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_video_flutter/stream_video_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class CallPage extends StatefulWidget {
   const CallPage({super.key});
@@ -17,6 +17,11 @@ class _CallPageState extends State<CallPage> {
   @override
   void initState() {
     super.initState();
+    init();
+  }
+
+  Future<void> init() async {
+    await requestPermissions();
     initCall();
   }
 
@@ -27,15 +32,22 @@ class _CallPageState extends State<CallPage> {
     });
   }
 
+  Future<void> requestPermissions() async {
+    await [Permission.camera, Permission.microphone].request();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: call == null
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator(color: Colors.blue))
           : StreamCallContainer(
               call: call!,
               onLeaveCallTap: () {
-                log('message');
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                );
               },
             ),
     );

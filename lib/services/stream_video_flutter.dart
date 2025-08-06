@@ -9,7 +9,6 @@ class StreamVideoService {
 
   static Future<void> init() async {
     final String userId = 'user${DateTime.now().millisecondsSinceEpoch}';
-
     try {
       client = StreamVideo(
         'zgzw22hzk2zz',
@@ -22,9 +21,10 @@ class StreamVideoService {
   }
 
   static Future<Call> joinCall(String callId) async {
+    if (_call != null) return _call!;
     _call = client.makeCall(
       callType: StreamCallType.defaultType(),
-      id: 'Test Room',
+      id: 'Test_Room',
     );
     await _call!.join();
     return _call!;
