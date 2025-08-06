@@ -12,22 +12,22 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 120, horizontal: 20),
           child: Column(
-            spacing: 5,
             children: [
               Image.asset('assets/images/family.jpg'),
               Text(
-                'This app brings our family closer, no matter the distance between us.\nShare smiles, stories, and precious moments — anytime, anywhere.\nClick below to reconnect and see who’s already inside the family circle.',
-                style: TextStyle(fontFamily: 'Cairo', color: Colors.grey),
+                'This app brings our family closer, no matter the distance between us.Share smiles, stories, and precious moments anytime, anywhere.\nClick below to reconnect and see who’s already inside the family circle.',
+                style: TextStyle(
+                  fontFamily: 'Cairo',
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
+              SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
-                  GoRouter.of(context).push(CallPage.path);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const CallPage()),
-                  );
+                  GoRouter.of(context).go(CallPage.path);
                 },
                 child: const Text(
                   'Resume Call',
