@@ -22,10 +22,7 @@ class StreamVideoService {
 
   static Future<Call> joinCall(String callId) async {
     if (_call != null) return _call!;
-    _call = client.makeCall(
-      callType: StreamCallType.defaultType(),
-      id: 'Test_Room',
-    );
+    _call = client.makeCall(callType: StreamCallType.defaultType(), id: callId);
     await _call!.join();
     return _call!;
   }

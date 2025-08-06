@@ -45,13 +45,14 @@ class _CallPageState extends State<CallPage> {
           ? const Center(child: CircularProgressIndicator(color: Colors.blue))
           : StreamCallContainer(
               call: call!,
-              onBackPressed: () {
-                GoRouter.of(context).go(HomePage.path);
-              },
-              onLeaveCallTap: () {
-                GoRouter.of(context).go(HomePage.path);
-              },
+              onBackPressed: () => _leaveCallAndGoHome(context),
+              onLeaveCallTap: () => _leaveCallAndGoHome(context),
             ),
     );
+  }
+
+  void _leaveCallAndGoHome(BuildContext context) {
+    StreamVideoService.leaveCall();
+    GoRouter.of(context).go(HomePage.path);
   }
 }
