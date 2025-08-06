@@ -1,11 +1,13 @@
 import 'package:family_meeting/pages/home_page.dart';
 import 'package:family_meeting/services/stream_video_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stream_video_flutter/stream_video_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CallPage extends StatefulWidget {
   const CallPage({super.key});
+  static final String path = '/CallPage';
 
   @override
   State<CallPage> createState() => _CallPageState();
@@ -43,11 +45,11 @@ class _CallPageState extends State<CallPage> {
           ? const Center(child: CircularProgressIndicator(color: Colors.blue))
           : StreamCallContainer(
               call: call!,
+              onBackPressed: () {
+                GoRouter.of(context).go(HomePage.path);
+              },
               onLeaveCallTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
+                GoRouter.of(context).go(HomePage.path);
               },
             ),
     );

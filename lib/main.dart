@@ -1,4 +1,4 @@
-import 'package:family_meeting/pages/call_page.dart';
+import 'package:family_meeting/app_router.dart';
 import 'package:family_meeting/services/stream_video_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +13,9 @@ class FamilyMeetingApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: CallPage());
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: AppRouter.router,
+    );
   }
 }
